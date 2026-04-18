@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa Colaborativo Rádio/GPRS</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel" id="auth-panel">
+        <h1>Mapa Colaborativo</h1>
+        <p>Faça login para compartilhar marcadores de rádio e GPRS.</p>
+
+        <form id="auth-form" class="stack">
+          <input id="username" type="text" placeholder="Usuário" autocomplete="username" required />
+          <input id="password" type="password" placeholder="Senha" autocomplete="current-password" required />
+          <div class="row">
+            <button type="submit" data-mode="login">Entrar</button>
+            <button type="button" id="register-btn">Criar conta</button>
+          </div>
+          <p id="auth-message" class="message"></p>
+        </form>
+      </section>
+
+      <section class="panel hidden" id="map-panel">
+        <header class="toolbar">
+          <div>
+            <strong id="current-user"></strong>
+            <p>Clique no mapa para inserir um marcador.</p>
+          </div>
+          <button id="logout-btn">Sair</button>
+        </header>
+
+        <div class="controls">
+          <label>
+            Tipo
+            <select id="marker-type">
+              <option value="radio">Rádio</option>
+              <option value="gprs">GPRS</option>
+            </select>
+          </label>
+          <label>
+            Rótulo
+            <input id="marker-label" type="text" placeholder="Ex: Torre Norte" maxlength="120" />
+          </label>
+        </div>
+
+        <div id="map"></div>
+        <aside>
+          <h2>Marcadores</h2>
+          <ul id="marker-list"></ul>
+        </aside>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
